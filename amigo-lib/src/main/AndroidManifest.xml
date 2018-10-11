@@ -1,0 +1,116 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="me.ele.amigo">
+
+    <application>
+
+        <service
+            android:name=".AmigoService"
+            android:process=":amigo"/>
+
+        <activity
+            android:name=".KillSelfActivity"
+            android:theme="@style/transparent_theme"/>
+
+        <activity
+            android:name=".release.ApkReleaseActivity"
+            android:alwaysRetainTaskState="false"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:process=":amigo"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".stub.ActivityStub$StandardStub"
+            android:launchMode="standard"/>
+
+        <!-- single instance stubs-->
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub1"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub2"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub3"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub4"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub5"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub6"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub7"
+            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleInstanceStub8"
+            android:launchMode="singleInstance"/>
+
+        <!-- single task stubs-->
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub1"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub2"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub3"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub4"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub5"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub6"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub7"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTaskStub8"
+            android:launchMode="singleTask"/>
+
+        <!-- single top stubs-->
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub1"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub2"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub3"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub4"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub5"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub6"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub7"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".stub.ActivityStub$SingleTopStub8"
+            android:launchMode="singleTop"/>
+
+        <service
+            android:name=".stub.ServiceStub"
+            android:exported="false"
+            />
+
+        <provider
+            android:name=".stub.ProviderStub"
+            android:authorities="${applicationId}.provider"
+            android:exported="true"/>
+
+    </application>
+
+</manifest>

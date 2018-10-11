@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+
+apply from: './jacoco.gradle'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        consumerProguardFiles 'proguard-rules.txt'
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+            }
+        }
+        defaultConfig {
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            testCoverageEnabled = true
+        }
+    }
+    flavorDimensions "flavors"
+    productFlavors {
+        amigoTest {
+            minSdkVersion 8 // espresso runs on only 8+
+            dimension "flavors"
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2')
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation "org.robolectric:robolectric:3.8"
+    testImplementation 'commons-codec:commons-codec:1.4'
+    androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+}
+
+
+
+

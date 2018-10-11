@@ -1,0 +1,104 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+repositories {
+    jcenter()
+    google()
+}
+
+apply plugin: 'groovy'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.tools.build:gradle:3.1.1'
+    compile 'net.lingala.zip4j:zip4j:1.3.2'
+}
+
+def GROUP = 'me.ele'
+def ARTIFACTID = 'amigo'
+
+group = GROUP
+Properties gradleProperties = new Properties()
+gradleProperties.load(new File(project.projectDir, '../gradle.properties').newDataInputStream())
+version = gradleProperties.getProperty('VERSION')
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "jack_1900"
+            name "Jack Cho"
+            email "jack_1900@163.com"
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId GROUP
+            artifactId ARTIFACTID
+            version version
+
+            pom.withXml {
+                def root = asNode()
+                root.children().last() + pomConfig
+            }
+            artifact sourcesJar
+        }
+    }
+}
+
+try {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintray {
+        user = properties.getProperty("bintrayUser")
+        key = properties.getProperty("bintrayApiKey")
+        pkg {
+            repo = 'maven'
+            name = ARTIFACTID
+            userOrg = user
+            publications = ['MyPublication']
+            licenses = ['Apache-2.0']
+            vcsUrl = 'https://github.com/eleme/Amigo'
+        }
+    }
+} catch (Exception e) {
+    println e.toString()
+}
+
+// configure local maven, release key, and the like
+try {
+    apply from: "${project.projectDir}/mybuild.gradle"
+} catch (Exception e) {
+    println e.toString()
+}
