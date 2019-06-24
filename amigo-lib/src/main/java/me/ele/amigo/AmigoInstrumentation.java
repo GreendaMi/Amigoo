@@ -39,6 +39,15 @@ public class AmigoInstrumentation extends Instrumentation implements IInstrument
     private Method methodExecStart5;
     private Method methodExecStart6;
 
+    @Override
+    public Activity newActivity(ClassLoader cl, String className,
+                                Intent intent)
+            throws InstantiationException, IllegalAccessException,
+            ClassNotFoundException {
+
+        return oldInstrumentation.newActivity(cl, className, intent);
+    }
+
     public AmigoInstrumentation(Instrumentation oldInstrumentation) {
         this.oldInstrumentation = oldInstrumentation;
     }

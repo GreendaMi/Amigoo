@@ -61,12 +61,12 @@ class AmigoPlugin implements Plugin<Project> {
 
                     def applicationName = null
                     def generateCodeTask
-                    File manifestFile = output.processManifest.manifestOutputDirectory
+                    File manifestFile = output.processManifest.manifestOutputDirectory.get().asFile
                     if (manifestFile.exists()) {
                         manifestFile.delete()
                     }
                     output.processManifest.doLast {
-                        String manifestPath = "${output.processManifest.manifestOutputDirectory.path}/AndroidManifest.xml"
+                        String manifestPath = output.processManifest.manifestOutputDirectory.get().asFile.path+"/AndroidManifest.xml"
                         manifestFile = new File(manifestPath)
 
                         //fake original application as an activity, so it will be in main dex
@@ -79,7 +79,7 @@ class AmigoPlugin implements Plugin<Project> {
                             }
                         }
 
-                        QName nameAttr = new QName("http://schemas.android.com/apk/res/android", 'name', 'android');
+                        QName nameAttr = new QName("http://schemas.android.com/apk/res/android", 'name', 'android')
                         applicationName = appNode.attribute(nameAttr)
                         if (applicationName == null || applicationName.isEmpty()) {
                             applicationName = "android.app.Application"
@@ -107,7 +107,7 @@ class AmigoPlugin implements Plugin<Project> {
                             variantDirName variant.dirName
                             appName applicationName
                         }
-                        generateCodeTask.execute()
+                        generateCodeTask.taskAction()
 
                         println "generateCodeTask: ${generateCodeTask.name} execute"
                     }

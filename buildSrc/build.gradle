@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         jcenter()
+
+        maven { url "https://maven.google.com" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
     dependencies {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
@@ -10,6 +13,9 @@ buildscript {
 repositories {
     jcenter()
     google()
+
+    maven { url "https://maven.google.com" }
+    maven { url 'https://dl.bintray.com/umsdk/release' }
 }
 
 apply plugin: 'groovy'
@@ -21,7 +27,7 @@ dependencies {
     compile localGroovy()
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.tools.build:gradle:3.1.1'
+    compile 'com.android.tools.build:gradle:3.4.1'
     compile 'net.lingala.zip4j:zip4j:1.3.2'
 }
 

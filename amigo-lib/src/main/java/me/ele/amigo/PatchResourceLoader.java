@@ -24,7 +24,9 @@ class PatchResourceLoader {
     static void loadPatchResources(Context context, String checksum) throws Exception {
         AssetManager newAssetManager = AssetManager.class.newInstance();
         invokeMethod(newAssetManager, "addAssetPath", PatchApks.getInstance(context).patchPath(checksum));
-        invokeMethod(newAssetManager, "ensureStringBlocks");
+        if (Build.VERSION.SDK_INT <= 26) {
+            invokeMethod(newAssetManager, "ensureStringBlocks");
+        }
         replaceAssetManager(context, newAssetManager);
     }
 
