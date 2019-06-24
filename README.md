@@ -6,8 +6,9 @@
 
 [相关的说明2](https://juejin.im/post/5a5c4b9c6fb9a01cb1391d82)
 
+[相关的说明3](https://juejin.im/post/5d10741351882522a752282d)
 
-适配gradle3.X，Android O
+适配gradle3.X，Android O, Android P
 
 测试：
 
